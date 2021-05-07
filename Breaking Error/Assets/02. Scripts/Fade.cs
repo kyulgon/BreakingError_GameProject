@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour
 {
     public Image Panel;
-    float time=0f;
+    float time = 0f;
     float F_time = 1f;
 
     public void Fadee()
     {
-        StartCoroutine (FadeFlow());
+        StartCoroutine(FadeFlow());
     }
 
     IEnumerator FadeFlow()

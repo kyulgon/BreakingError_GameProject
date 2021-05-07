@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public Transform target;
+    public bool isChase;
 
     Rigidbody rigid;
     BoxCollider boxCollider;
@@ -18,19 +19,30 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        mat = GetComponentInChildren<MeshRenderer>().material;
+        mat = GetComponent<MeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();
+
+        Invoke("ChaseStart", 2);
+    }
+
+    void ChaseStart()
+    {
+        isChase = true;
     }
 
     private void Update()
     {
-        nav.SetDestination(target.position);
+        if(isChase)
+            nav.SetDestination(target.position);
     }
 
     void FreezeVelocity()
     {
-        rigid.velocity = Vector3.zero;
-        rigid.angularVelocity = Vector3.zero;
+        if(isChase)
+        {
+            rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
+        }       
     }
 
     private void FixedUpdate()
@@ -76,6 +88,8 @@ public class Enemy : MonoBehaviour
         {
             mat.color = Color.gray;
             gameObject.layer = 14; // 레이어 바꾸기
+            isChase = false;
+            nav.enabled = false;
 
             // 넉백
             reactVec = reactVec.normalized;

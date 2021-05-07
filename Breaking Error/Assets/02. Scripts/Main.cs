@@ -7,8 +7,9 @@ public class Main : MonoBehaviour
 {
     public void PlayBtn()
     {
-        SceneManager.LoadScene("Play");
-        SceneManager.LoadScene("Game");
+       
+        SceneManager.LoadScene("Error");
+        SceneManager.LoadScene("Next");
         SceneManager.LoadScene("MainGame");
 
     }

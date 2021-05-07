@@ -15,7 +15,7 @@ public class SceneLoader : MonoBehaviour
     private void Start()
     {
         StartCoroutine(LoadScene());
-        
+
     }
 
     public static void LoadSceneHandle(string _name, int _loadType)
@@ -23,13 +23,13 @@ public class SceneLoader : MonoBehaviour
         loadScene = _name;
         loadType = _loadType;
         SceneManager.LoadScene("Load");
-      
+
     }
 
     IEnumerator LoadScene()
     {
         yield return null;
-        AsyncOperation operation = SceneManager.LoadSceneAsync("Play");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Error");
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)
@@ -38,13 +38,13 @@ public class SceneLoader : MonoBehaviour
 
             if (loadType == 0)
                 Debug.Log("new game");
-     
+
 
             if (progressbar.value < 0.9f)
             {
                 progressbar.value = Mathf.MoveTowards(progressbar.value, 0.9f, Time.deltaTime);
             }
-            else if(operation.progress>=0.9f)
+            else if (operation.progress >= 0.9f)
             {
                 progressbar.value = Mathf.MoveTowards(progressbar.value, 1f, Time.deltaTime);
             }
@@ -53,7 +53,7 @@ public class SceneLoader : MonoBehaviour
             {
                 loadText.text = "Press Space";
             }
-            if (Input.GetKeyDown(KeyCode.Space)&&progressbar.value>=1f&&operation.progress>=.9f)
+            if (Input.GetKeyDown(KeyCode.Space) && progressbar.value >= 1f && operation.progress >= .9f)
             {
                 operation.allowSceneActivation = true;
             }
@@ -62,7 +62,7 @@ public class SceneLoader : MonoBehaviour
 
     }
 
-    
+
 
 }
 

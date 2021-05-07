@@ -10,6 +10,6 @@ public class MainUI : MonoBehaviour
         QUIT,
         ERROR,
         NEXT
-        
+
     }
 }

@@ -19,15 +19,15 @@ public class Error : MonoBehaviour
     {
         loadError = _name;
         loadType1 = _loadType1;
-        
-        SceneManager.LoadScene("Game");
+
+        SceneManager.LoadScene("Next");
     }
 
-   
+
     IEnumerator LoadError()
     {
         yield return null;
-        AsyncOperation operation = SceneManager.LoadSceneAsync("Game");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Next");
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)
@@ -36,13 +36,13 @@ public class Error : MonoBehaviour
 
             if (loadType1 == 0)
                 Debug.Log("new game");
-           
+
         }
 
 
     }
 
-    
+
 
 }
 
