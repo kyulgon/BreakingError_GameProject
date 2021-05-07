@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Floor")
+        if(collision.gameObject.CompareTag("Floor"))
         {
             anim.SetBool("IsJump", false);
             isJump = false;
