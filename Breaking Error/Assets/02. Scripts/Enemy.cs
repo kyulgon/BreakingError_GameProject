@@ -11,18 +11,21 @@ public class Enemy : MonoBehaviour
     public bool isChase;
 
     Rigidbody rigid;
-    BoxCollider boxCollider;
     Material mat;
     NavMeshAgent nav;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-        boxCollider = GetComponent<BoxCollider>();
         mat = GetComponent<MeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();
 
         Invoke("ChaseStart", 2);
+    }
+
+    private void Start()
+    {
+        target = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     void ChaseStart()
@@ -52,15 +55,12 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(curHealth);
-        if (other.tag == "Melee")
+        if (other.CompareTag("Melee"))
         {
             Weapon weapon = other.GetComponent<Weapon>();
             curHealth -= weapon.damage;
             Vector3 reactVec = transform.position - other.transform.position; // 반작용 방향구하기
             StartCoroutine(OnDamage(reactVec));
-
-            Debug.Log(curHealth);
         }
         else if(other.tag == "Bullet")
         {
@@ -70,8 +70,6 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
 
             StartCoroutine(OnDamage(reactVec));
-
-            Debug.Log(curHealth);
         }
     }
 

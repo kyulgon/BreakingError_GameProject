@@ -49,11 +49,13 @@ public class Player : MonoBehaviour
     int equipWeaponIndex = -1; // 장착중인 무기 인덱스
     float fireDelay; // 공격 딜레이
 
+    
 
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
+        followCamera = FindObjectOfType<Camera>();
     }
 
 

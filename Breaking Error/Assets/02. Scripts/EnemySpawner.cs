@@ -9,8 +9,7 @@ public class EnemySpawner : MonoBehaviour
 
     private List<Enemy> enemies = new List<Enemy>(); // 积己等 利阑 淬绰 府胶飘
 
-    private int enemyCount = 0;
-    private int wave;
+    private int wave =1;
 
     void Start()
     {
@@ -19,10 +18,15 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if(enemies.Count <= 0)
+        
+        if(enemies.Count <=0)
         {
             SpawnWave();
+            SpawnWave();
+            SpawnWave();
         }
+        
+        
     }
 
     void SpawnWave()
@@ -34,12 +38,10 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < spawnCount; i++) // spawnCount父怒 利 积己
         {
-            CreateEnemy();
+            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            enemies.Add(enemy);
         }
     }
 
-    void CreateEnemy()
-    {
-
-    }
 }
